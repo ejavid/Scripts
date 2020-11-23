@@ -1,0 +1,27 @@
+Ths script locates any files that ends with .egp and then open it as a zip file so the content in these files can ben minipulated or extracted 
+import zipfile 
+import os 
+import pandas as pd 
+destination = ""Where you want to save the zip files"
+Tables = []
+for root, dirs, files in os.walk("Location you want to search"):
+  for file in files:
+    file = file.upper()
+    if file.endswith(".EGP"):
+      path = os.path.join(root, file)
+      with zipfile.ZipFile(path) as zf:
+        zf.extractall(destination)
+        
+        After storing these files in the destination folder you will need another loop to locate the .SAS files so you can see the content 
+ for root, dirs, files in os.walk(destination):
+  for file in files:
+    file = file.upper()
+    if file.endswith(".SAS")
+    path2 = os.path.join(root, file)
+    with open (path2, "r") as f:
+      for line in f:
+        for word in line.split():
+          words = word.upper()
+          if words.startswith("Words you are looking for"):
+            final = [path, words]
+            Tables.append(final)
