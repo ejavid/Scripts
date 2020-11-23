@@ -1,0 +1,21 @@
+This Script search for a file extensions, opens the file and then extract the data or words that match the criteria in the logic. Exports the clean data in a excel sheet
+import os 
+import pandas as pd
+Tables = []
+for root, dirs, files in os.walk("Your Path"):
+  for file in files:
+    file = file.upper()
+    if file.endswith("Ext") or file.endswit("another_Ext"):
+      path = os.path.join(root,file)
+      with open(path, "r") as f:
+        for line in f:
+          for word in line.split():
+            words = word.upper()
+            if words.startswith("Matchwords") or words.startswith ("Other words"):
+              Final = [path, words]
+              Tables.append(Final)
+              
+df = pd.DataFrame(Tables, columns = ["Path","Sources"]
+writer = pd.ExcelWriter("Output.xlsx")
+df.to_excel(writer)
+writer.save()
